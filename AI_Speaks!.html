@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI by ANC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #F9FAFB;
+        }
+        .ai-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://i.gifer.com/origin/b8/b8e45874c76d2984a9b55169a8e734a3_w200.gif');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+        .card {
+            background-color: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .pdf-tab-button {
+            transition: background-color 0.3s ease;
+        }
+        /* Simple loading spinner */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-background"></div>
+
+    <header class="text-center py-12 px-4">
+        <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight">AI by ANC</h1>
+        <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">Exploring the world of Artificial Intelligence, from productivity tools to ethical considerations.</p>
+    </header>
+
+    <main class="container mx-auto px-4 pb-16">
+
+        <!-- Introduction to AI Section -->
+        <section id="intro" class="my-16 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-8">What is AI?</h2>
+            <div class="max-w-4xl mx-auto bg-gray-900/50 p-8 rounded-lg border border-gray-700">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Artificial Intelligence has transformed from a science fiction concept into an everyday reality that powers our digital experiences. At its core, AI simulates human intelligence. These systems are designed to mimic cognitive functions like learning, reasoning, problem-solving, and understanding natural language. Modern AI continuously improves by analyzing patterns in vast datasets, adapting to new information, and automating complex tasks. From Siri and Google Maps to Netflix recommendations, AI already shapes how we navigate our digital world, boosting productivity and enhancing professional growth.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Gemini Feature Section -->
+        <section id="gemini-feature" class="my-16 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12">Experience AI in Action</h2>
+            <div class="max-w-4xl mx-auto card rounded-lg p-6 md:p-8">
+                <p class="text-center text-gray-300 mb-6">Paste any text below and let our Gemini-powered AI assist you. See for yourself how AI can boost productivity!</p>
+                <textarea id="gemini-input" class="w-full h-48 p-4 rounded-md bg-gray-800 border border-gray-600 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Paste your text here..."></textarea>
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <button id="summarize-btn" class="px-6 py-2 rounded-md text-white font-semibold bg-indigo-600 hover:bg-indigo-500 transition-colors disabled:bg-gray-500">✨ Summarize Text</button>
+                    <button id="explain-btn" class="px-6 py-2 rounded-md text-white font-semibold bg-teal-600 hover:bg-teal-500 transition-colors disabled:bg-gray-500">✨ Explain It Simply</button>
+                </div>
+                <div id="gemini-output-container" class="mt-8">
+                    <div id="loader" class="loader hidden"></div>
+                    <div id="gemini-output" class="p-6 rounded-md bg-gray-900/70 border border-gray-700 text-gray-200 whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Tools Section -->
+        <section id="tools" class="my-16 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12">Free AI Tools to Boost Your Productivity</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Text & Content Creation</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>ChatGPT:</strong> For writing, brainstorming, and explanations.</li>
+                        <li><strong>Claude:</strong> Processes long documents with nuanced replies.</li>
+                        <li><strong>GravityWrite:</strong> Creates marketing content and blogs.</li>
+                        <li><strong>AnySummary & Merlin:</strong> Summarizes articles directly in your browser.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Presentations</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>SlidesGPT:</strong> Auto-generates slide decks from text prompts.</li>
+                        <li><strong>Gamma:</strong> Creates dynamic, responsive presentations with AI design.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Visual & Design Creation</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>Grok (X/Twitter):</strong> Quick image generation on social media.</li>
+                        <li><strong>Canva (AI):</strong> Smart design templates and image creation.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Social Media Content</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>AICarousels:</strong> Transforms articles into engaging carousels.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Video Creation & Editing</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>CapCut:</strong> AI-powered editing for short-form videos.</li>
+                        <li><strong>Guidde & Descript:</strong> Turn screens into tutorials and edit video like text.</li>
+                        <li><strong>Veed & OpusClip:</strong> Auto-subtitles and long-to-short video conversion.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Career & Research</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><strong>ResumeMaker:</strong> Creates ATS-friendly resumes.</li>
+                        <li><strong>Yoodli:</strong> AI interview and public speaking coaching.</li>
+                        <li><strong>Perplexity:</strong> AI search with cited sources.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Ethics Section -->
+        <section id="ethics" class="my-16 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12">The Crucial Role of AI Ethics</h2>
+            <div class="max-w-5xl mx-auto">
+                <p class="text-center text-lg text-gray-300 mb-10">AI ethics refers to the moral principles guiding the development and use of artificial intelligence. It ensures AI systems are designed to respect human rights, promote fairness, and prevent harm.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-3">Fairness</h3>
+                        <p class="text-gray-400">AI systems should treat all people equally and avoid perpetuating biases against any group.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-3">Transparency</h3>
+                        <p class="text-gray-400">AI processes should be explainable and understandable to those affected by them.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-3">Human Oversight</h3>
+                        <p class="text-gray-400">Humans should maintain control over AI systems and their decision-making processes.</p>
+                    </div>
+                     <div class="card p-6 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-3">Privacy</h3>
+                        <p class="text-gray-400">AI systems must respect user privacy and secure personal data from unauthorized access.</p>
+                    </div>
+                     <div class="card p-6 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-3">Accountability</h3>
+                        <p class="text-gray-400">Developers and users of AI should be held responsible for its outcomes and impacts.</p>
+                    </div>
+                </div>
+                 <div class="mt-10 text-center text-gray-400 italic">
+                    <p>"The greatest danger of artificial intelligence is that people conclude too early that they understand it." - Eliezer Yudkowsky</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore More PDF Viewer Section -->
+        <section id="explore" class="my-16 fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12">Explore More: Read the Original PDFs</h2>
+            <div class="max-w-6xl mx-auto card rounded-lg p-4">
+                <!-- PDF selection buttons -->
+                <div id="pdf-buttons" class="flex flex-wrap justify-center gap-4 mb-4">
+                    <button class="pdf-tab-button px-4 py-2 rounded-md text-white font-semibold bg-indigo-600" data-pdf-src="https://drive.google.com/file/d/1aSiO9JgfMEfrQXuawWsZqmOKTjUhMRF1/preview">AI Tools</button>
+                    <button class="pdf-tab-button px-4 py-2 rounded-md text-white font-semibold bg-gray-600 hover:bg-gray-500" data-pdf-src="https://drive.google.com/file/d/1e_nMjeKXRWjrO_F56p-jRd6BIGmThEQA/preview">AI Ethics</button>
+                    <button class="pdf-tab-button px-4 py-2 rounded-md text-white font-semibold bg-gray-600 hover:bg-gray-500" data-pdf-src="https://drive.google.com/file/d/1ltDHyIv6wJaM0066NO5KszmEO2JMfWrF/preview">AI Hacks</button>
+                </div>
+
+                <!-- PDF viewer -->
+                <div class="pdf-viewer-container" style="height: 80vh;">
+                    <embed id="pdf-viewer" src="https://drive.google.com/file/d/1aSiO9JgfMEfrQXuawWsZqmOKTjUhMRF1/preview" type="application/pdf" width="100%" height="100%">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 border-t border-gray-800">
+        <p class="text-gray-500">Created by ANC | Powered by AI</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Script for fade-in animations on scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            fadeInElements.forEach(el => observer.observe(el));
+
+            // --- Script for PDF viewer tabs ---
+            const pdfButtons = document.querySelectorAll('.pdf-tab-button');
+            const pdfViewer = document.getElementById('pdf-viewer');
+
+            pdfButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const pdfSrc = button.getAttribute('data-pdf-src');
+                    pdfViewer.setAttribute('src', pdfSrc);
+                    pdfButtons.forEach(btn => {
+                        btn.classList.remove('bg-indigo-600');
+                        btn.classList.add('bg-gray-600', 'hover:bg-gray-500');
+                    });
+                    button.classList.add('bg-indigo-600');
+                    button.classList.remove('bg-gray-600', 'hover:bg-gray-500');
+                });
+            });
+
+            // --- Script for Gemini API Feature ---
+            const summarizeBtn = document.getElementById('summarize-btn');
+            const explainBtn = document.getElementById('explain-btn');
+            const geminiInput = document.getElementById('gemini-input');
+            const geminiOutput = document.getElementById('gemini-output');
+            const loader = document.getElementById('loader');
+
+            const callGeminiAPI = async (prompt, maxRetries = 3) => {
+                loader.classList.remove('hidden');
+                geminiOutput.textContent = '';
+                summarizeBtn.disabled = true;
+                explainBtn.disabled = true;
+
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // API key will be injected by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                for (let i = 0; i < maxRetries; i++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            geminiOutput.textContent = text;
+                        } else {
+                           geminiOutput.textContent = 'Error: Could not get a valid response from the AI. The response structure might have changed.';
+                        }
+                        
+                        // Success, exit retry loop
+                        break; 
+
+                    } catch (error) {
+                        console.error('Error calling Gemini API:', error);
+                        if (i === maxRetries - 1) {
+                           geminiOutput.textContent = 'An error occurred while contacting the AI service. Please try again later.';
+                        } else {
+                            // Wait before retrying (exponential backoff)
+                            await new Promise(resolve => setTimeout(resolve, (2 ** i) * 1000));
+                        }
+                    }
+                }
+
+                loader.classList.add('hidden');
+                summarizeBtn.disabled = false;
+                explainBtn.disabled = false;
+            };
+
+            summarizeBtn.addEventListener('click', () => {
+                const inputText = geminiInput.value;
+                if (inputText.trim()) {
+                    const prompt = `Summarize the following text in a few key bullet points:\n\n---\n${inputText}\n---`;
+                    callGeminiAPI(prompt);
+                } else {
+                    geminiOutput.textContent = 'Please enter some text to summarize.';
+                }
+            });
+
+            explainBtn.addEventListener('click', () => {
+                const inputText = geminiInput.value;
+                if (inputText.trim()) {
+                    const prompt = `Explain the following text in simple, easy-to-understand terms, as if you were explaining it to a beginner:\n\n---\n${inputText}\n---`;
+                    callGeminiAPI(prompt);
+                } else {
+                    geminiOutput.textContent = 'Please enter some text to explain.';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
